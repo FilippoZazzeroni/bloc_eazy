@@ -1,4 +1,7 @@
 
-abstract class BlocState {
-  abstract final String rawValue;
+class BlocState {
+
+  BlocState(this.rawValue);
+
+  final String rawValue;
 }

@@ -3,16 +3,17 @@ import 'package:bloc_eazy/provider_manager.dart';
 import 'bloc_coordinator.dart';
 import 'bloc_state.dart';
 
-abstract class Bloc<T extends BlocState, C extends BlocCoordinator> {
-  abstract final BlocCoordinator coordinator;
+abstract class Bloc {
+
+  final BlocCoordinator coordinator = BlocCoordinator();
 
   //MARK: getters
 
-  Stream<C> get stream;
+  Stream<BlocCoordinator> get stream => coordinator.controller.stream;
 
-  T get state;
+  BlocState get state => coordinator.state;
 
-  void setState(T state) {
+  void setState(BlocState state) {
     coordinator.setState(state);
   }
 

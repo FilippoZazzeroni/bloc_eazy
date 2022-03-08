@@ -1,21 +1,27 @@
 
 import 'dart:async';
-
 import 'bloc_state.dart';
 
-abstract class BlocCoordinator<State extends BlocState> {
+class BlocCoordinator {
 
   BlocCoordinator() {
     onControllerFirstListenCallback();
   }
 
-  State getState();
+  BlocState getState() {
+    return state;
+  }
 
-  void setState(State state);
+  void setState(BlocState state) {
+    this.state = state;
+    controller.add(this);
+  }
 
-  abstract final State state;
+  BlocState state = BlocState("idle");
 
-  abstract final StreamController<BlocCoordinator> controller;
+  StreamController<BlocCoordinator> controller = StreamController.broadcast();
 
-  void onControllerFirstListenCallback();
+  void onControllerFirstListenCallback() {
+    controller.add(this);
+  }
 }
