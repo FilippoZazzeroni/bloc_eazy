@@ -14,14 +14,14 @@ class BlocCoordinator {
 
   void setState(BlocState state) {
     this.state = state;
-    controller.add(this);
+    controller.add(state);
   }
 
   BlocState state = BlocState("idle");
 
-  StreamController<BlocCoordinator> controller = StreamController.broadcast();
+  StreamController<BlocState> controller = StreamController.broadcast();
 
   void onControllerFirstListenCallback() {
-    controller.add(this);
+    controller.add(state);
   }
 }

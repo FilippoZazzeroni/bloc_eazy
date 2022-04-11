@@ -9,7 +9,7 @@ abstract class Bloc {
 
   //MARK: getters
 
-  Stream<BlocCoordinator> get stream => coordinator.controller.stream;
+  Stream<BlocState> get stream => coordinator.controller.stream;
 
   BlocState get state => coordinator.state;
 
