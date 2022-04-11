@@ -29,7 +29,7 @@ class _ViewState extends State<View> with BlocInizitalizerable{
     return Scaffold(
         body: BlocBuilder<Notifier, NotifierState>(builder: (context, snapshot) {
           if (kDebugMode) {
-            print(snapshot.data?.rawValue);
+            print(snapshot.data?.idle);
           }
           return TextButton(
               onPressed: () {
@@ -52,5 +52,5 @@ class Notifier extends Bloc {
 class NotifierState extends BlocState {
   NotifierState(String rawValue) : super(rawValue);
 
-  static const idle = "idle";
+  final idle = "idle";
 }
