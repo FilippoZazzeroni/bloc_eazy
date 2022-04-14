@@ -1,5 +1,6 @@
-import 'package:bloc_eazy/provider_manager.dart';
+library bloc_eazy;
 
+import 'package:bloc_eazy/bloc/manager/provider_manager.dart';
 import 'bloc.dart';
 
 class BlocProvider<T extends Bloc> {

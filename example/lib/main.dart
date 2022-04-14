@@ -1,56 +1,27 @@
 
 import 'package:bloc_eazy/export.dart';
-import 'package:flutter/foundation.dart';
+import 'package:example/ui/views/notifier_eazy_view.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_mixins/export.dart';
+
+import 'models/bloc_eazy_example/notifier_eazy.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: View(),
+  _setUpRoutes();
+  BlocProvider().create(NotifierEazy(NotifierEazyState("initial_state", helperState: HelperState.initialState)));
+
+  runApp(MaterialApp(
+    routes: NavigableRouter.instance.routes,
+    home: const NotifierEazyView(),
   ));
 }
 
-class View extends StatefulWidget  {
-  const View({Key? key}) : super(key: key);
-
-  @override
-  State<View> createState() => _ViewState();
+void _setUpRoutes() {
+  NavigableRouter.instance.setRoutes({
+    "/notifier_eazy": (context) => const NotifierEazyView()
+  });
 }
 
-class _ViewState extends State<View> with BlocInizitalizerable{
 
-  @override
-  void initState() {
-    initializer(bloc: Notifier());
-    super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: BlocBuilder<Notifier, NotifierState>(builder: (context, snapshot) {
-          if (kDebugMode) {
-            print(snapshot.data?.idle);
-          }
-          return TextButton(
-              onPressed: () {
-                final bloc = Bloc.ofType<Notifier>();
-                bloc.testNotifier();
-              },
-              child: const Text("ciaoo"));
-        })
-    );
-  }
-}
 
-class Notifier extends Bloc {
-
-  void testNotifier() {
-    setState(NotifierState("rawValue"));
-  }
-}
-
-class NotifierState extends BlocState {
-  NotifierState(String rawValue) : super(rawValue);
-
-  final idle = "idle";
-}

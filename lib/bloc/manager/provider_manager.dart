@@ -1,6 +1,6 @@
 
 
-import 'bloc.dart';
+import '../bloc.dart';
 
 class ProviderManager {
 

@@ -2,24 +2,25 @@
 import 'dart:async';
 import 'bloc_state.dart';
 
-class BlocCoordinator {
+class BlocCoordinator<T extends BlocState> {
 
-  BlocCoordinator() {
+  BlocCoordinator(T initialState) {
+    state = initialState;
     onControllerFirstListenCallback();
   }
 
-  BlocState getState() {
+  T getState() {
     return state;
   }
 
-  void setState(BlocState state) {
+  void setState(T state) {
     this.state = state;
     controller.add(state);
   }
 
-  BlocState state = BlocState("idle");
+  late T state;
 
-  StreamController<BlocState> controller = StreamController.broadcast();
+  StreamController<T> controller = StreamController.broadcast();
 
   void onControllerFirstListenCallback() {
     controller.add(state);

@@ -1,3 +1,4 @@
+library bloc_eazy;
 
 class BlocState {
 
